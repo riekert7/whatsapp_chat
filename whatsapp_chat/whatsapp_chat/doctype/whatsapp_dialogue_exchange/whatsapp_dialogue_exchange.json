@@ -1,0 +1,67 @@
+{
+  "actions": [],
+  "allow_auto_repeat": 0,
+  "allow_copy": 0,
+  "allow_events_in_timeline": 0,
+  "allow_guest_to_view": 0,
+  "allow_import": 0,
+  "allow_rename": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "contact",
+    "whatsapp_dialogue",
+    "active",
+    "wde_table"
+  ],
+  "fields": [
+    {
+      "fieldname": "contact",
+      "fieldtype": "Link",
+      "label": "Contact",
+      "options": "Contact",
+      "reqd": 1
+    },
+    {
+      "fieldname": "whatsapp_dialogue",
+      "fieldtype": "Link",
+      "label": "WhatsApp Dialogue",
+      "options": "WhatsApp Dialogue",
+      "reqd": 1
+    },
+    {
+      "fieldname": "active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": 1
+    },
+    {
+      "fieldname": "wde_table",
+      "fieldtype": "Table",
+      "label": "Responses",
+      "options": "WhatsApp Dialogue Exchange Items"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "links": [],
+  "module": "Whatsapp Chat",
+  "name": "WhatsApp Dialogue Exchange",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
+} 

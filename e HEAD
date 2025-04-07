@@ -1,0 +1,69 @@
+[33md8167c9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mclean-history[m[33m, [m[1;31mupstream/cursor[m[33m, [m[1;32mcursor[m[33m)[m Modified chat flow code to accomodate execute custom script on WhatsApp Dialogue
+[33m6665267[m updated chat_flow.py to implement custom script funcitonality
+[33m53df0c0[m Ability to execute custom scripts when command is given
+[33m42cdd84[m guidelines for function_script usage
+[33m34d771e[m WhatsApp DIalogue Back
+[33m97ce7d4[m let's try this proper exit
+[33m5d89877[m chat_room proper exit
+[33mc304bb8[m reverting to version of app where chats are either user specic or all users share read status on chat
+[33m77048ab[m cursor messed up last_message_function
+[33m2466fda[m missed a few tings
+[33m78c094a[m a bunch of anothoer read updates
+[33me69572a[m going crazy with read status
+[33me70ebe6[m more serious logging for the mark ad read issue
+[33mc7bbf7b[m mutliple mark as read requests sent when on chat room
+[33m15a1f36[m 1
+[33mb66113c[m using doc.name and type in order to avoid deduplication in chat
+[33m7f85482[m Tryied to add messaged ID to prevent deduplication
+[33mfddd830[m more deduplication
+[33mb37b052[m Socket handling for multi user scenario...
+[33mefc8ebf[m serous logging
+[33m4c1066f[m removed hooks to new feautres and added deduplicate stuff
+[33m4a07863[m revert
+[33md6cdce5[m better deduplication
+[33mb720995[m 3 times display of message
+[33mae2d3ed[m removed logging
+[33mbd768c9[m forgot comma
+[33mb34100d[m more logging
+[33m1e52603[m more debugging
+[33m73e8a29[m oops
+[33me06f795[m logging json payload
+[33m69c760e[m commented out loggign
+[33m080ed8c[m some validation
+[33m802549f[m response logging
+[33mbc2783b[m testing command ability
+[33m0d60c8d[m throw
+[33m2bb2681[m print success api call
+[33m1d0ffc3[m must import make_post_request through utils integrations
+[33m0871a9c[m must import make_post_request through utils
+[33mc0a70a0[m must import make_post_request through utils
+[33m626b352[m you have to import make_post_request
+[33mf7bcf22[m dynamically update commands on whatsapp business API
+[33m4db3e50[m no need for customer on contact and fixed exchange line
+[33m4a50f5f[m not going to be using enabled field on WD for now
+[33m84d8271[m frappe.get_first does not exists
+[33m02a05cc[m doc.from_ refactored to doc.get('from')
+[33m60b4c13[m method added to afterinsert funtion
+[33m7b679dd[m fixed module name
+[33mf19c0fe[m fixed validate on whatsapp dialogue
+[33mf0fc931[m classes needed for propper import
+[33md86ca2c[m removed admin refs
+[33mc27df21[m removed some refs
+[33m262337a[m weird stuff removed from init py
+[33m8924019[m Child doctypes are not doccing
+[33m6337927[m done
+[33m95ab862[m missing files added
+[33ma3f3c93[m apparently order matters
+[33m0f4692c[m trying to import child doc
+[33m0c912eb[m fixed child docs
+[33mb9e3298[m incorrect module name
+[33m53bdd92[m bettered functionality of whatsapp dialogue exchange
+[33m62d64ef[m combined field mapping and whatsapp dialogue items
+[33m927f311[m docs fixed
+[33m79e5158[m bunch of new files for WDE
+[33mcc68e33[m More validation and error handling on whatsapp dialogue exchange
+[33m6d072e5[m fixed doctype spec
+[33mef4aae9[m moving whatsapp dialogue exchange functionality to whatsapp_chat app
+[33m2cb32ea[m just the basics
+[33m9c67147[m dark theme support
+[33mfcac26c[m bettered message bubbles

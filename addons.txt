@@ -1,0 +1,1466 @@
+Doctypes to add with app
+
+I have these doctypes:
+
+ {
+  "_assign": null,
+  "_comments": null,
+  "_last_update": null,
+  "_liked_by": null,
+  "_user_tags": null,
+  "actions": [],
+  "allow_auto_repeat": 0,
+  "allow_copy": 0,
+  "allow_events_in_timeline": 0,
+  "allow_guest_to_view": 0,
+  "allow_import": 0,
+  "allow_rename": 1,
+  "app": null,
+  "autoname": null,
+  "beta": 0,
+  "color": null,
+  "colour": null,
+  "custom": 1,
+  "default_email_template": null,
+  "default_print_format": null,
+  "default_view": null,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "documentation": null,
+  "editable_grid": 0,
+  "email_append_to": 0,
+  "engine": "InnoDB",
+  "fields": [
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "title",
+    "fieldtype": "Data",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 1,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 1,
+    "in_standard_filter": 1,
+    "is_virtual": 0,
+    "label": "Title",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": null,
+    "parent": "WhatsApp Dialogue",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "wd_table",
+    "fieldtype": "Table",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 0,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "WhatsApp Dialogue Items",
+    "parent": "WhatsApp Dialogue",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   }
+  ],
+  "force_re_route_to_default_view": 0,
+  "has_web_view": 0,
+  "hide_toolbar": 0,
+  "icon": null,
+  "image_field": null,
+  "in_create": 0,
+  "index_web_pages_for_search": 1,
+  "is_calendar_and_gantt": 0,
+  "is_published_field": null,
+  "is_submittable": 0,
+  "is_tree": 0,
+  "is_virtual": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "make_attachments_public": 0,
+  "max_attachments": 0,
+  "menu_index": null,
+  "migration_hash": null,
+  "modified": "2025-02-24 11:28:49.270713",
+  "module": "MSS Custom",
+  "name": "WhatsApp Dialogue",
+  "naming_rule": "",
+  "nsm_parent_field": null,
+  "parent_node": null,
+  "permissions": [
+   {
+    "amend": 0,
+    "cancel": 0,
+    "create": 1,
+    "delete": 1,
+    "email": 1,
+    "export": 1,
+    "if_owner": 0,
+    "import": 0,
+    "match": null,
+    "parent": "WhatsApp Dialogue",
+    "parentfield": "permissions",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "System Manager",
+    "select": 0,
+    "share": 1,
+    "submit": 0,
+    "write": 1
+   }
+  ],
+  "print_outline": null,
+  "queue_in_background": 0,
+  "quick_entry": 0,
+  "read_only": 0,
+  "restrict_to_domain": null,
+  "route": null,
+  "search_fields": null,
+  "sender_field": null,
+  "sender_name_field": null,
+  "show_name_in_global_search": 0,
+  "show_preview_popup": 0,
+  "show_title_field_in_link": 1,
+  "smallicon": null,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "subject": null,
+  "subject_field": null,
+  "tag_fields": null,
+  "timeline_field": null,
+  "title_field": "title",
+  "track_changes": 0,
+  "track_seen": 0,
+  "track_views": 0,
+  "translated_doctype": 0,
+  "website_search_field": null
+ },
+ {
+  "_assign": null,
+  "_comments": null,
+  "_last_update": null,
+  "_liked_by": null,
+  "_user_tags": null,
+  "actions": [],
+  "allow_auto_repeat": 0,
+  "allow_copy": 0,
+  "allow_events_in_timeline": 0,
+  "allow_guest_to_view": 0,
+  "allow_import": 0,
+  "allow_rename": 1,
+  "app": null,
+  "autoname": null,
+  "beta": 0,
+  "color": null,
+  "colour": null,
+  "custom": 1,
+  "default_email_template": null,
+  "default_print_format": null,
+  "default_view": null,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "documentation": null,
+  "editable_grid": 1,
+  "email_append_to": 0,
+  "engine": "InnoDB",
+  "fields": [
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "send_text",
+    "fieldtype": "Data",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Text to send",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": null,
+    "parent": "WhatsApp Dialogue Items",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "receive_text",
+    "fieldtype": "Select",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Receive Content",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "text\nimage\ndocument\nvideo\naudio\nflow\nreaction\nlocation\ncontact\nbutton",
+    "parent": "WhatsApp Dialogue Items",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "error_message",
+    "fieldtype": "Data",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Try again message",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": null,
+    "parent": "WhatsApp Dialogue Items",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   }
+  ],
+  "force_re_route_to_default_view": 0,
+  "has_web_view": 0,
+  "hide_toolbar": 0,
+  "icon": null,
+  "image_field": null,
+  "in_create": 0,
+  "index_web_pages_for_search": 1,
+  "is_calendar_and_gantt": 0,
+  "is_published_field": null,
+  "is_submittable": 0,
+  "is_tree": 0,
+  "is_virtual": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "make_attachments_public": 0,
+  "max_attachments": 0,
+  "menu_index": null,
+  "migration_hash": null,
+  "modified": "2025-02-24 11:28:49.168550",
+  "module": "MSS Custom",
+  "name": "WhatsApp Dialogue Items",
+  "naming_rule": "",
+  "nsm_parent_field": null,
+  "parent_node": null,
+  "permissions": [],
+  "print_outline": null,
+  "queue_in_background": 0,
+  "quick_entry": 0,
+  "read_only": 0,
+  "restrict_to_domain": null,
+  "route": null,
+  "search_fields": null,
+  "sender_field": null,
+  "sender_name_field": null,
+  "show_name_in_global_search": 0,
+  "show_preview_popup": 0,
+  "show_title_field_in_link": 0,
+  "smallicon": null,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "subject": null,
+  "subject_field": null,
+  "tag_fields": null,
+  "timeline_field": null,
+  "title_field": null,
+  "track_changes": 0,
+  "track_seen": 0,
+  "track_views": 0,
+  "translated_doctype": 0,
+  "website_search_field": null
+ },
+ {
+  "_assign": null,
+  "_comments": null,
+  "_last_update": null,
+  "_liked_by": null,
+  "_user_tags": null,
+  "actions": [],
+  "allow_auto_repeat": 0,
+  "allow_copy": 0,
+  "allow_events_in_timeline": 0,
+  "allow_guest_to_view": 0,
+  "allow_import": 0,
+  "allow_rename": 1,
+  "app": null,
+  "autoname": null,
+  "beta": 0,
+  "color": null,
+  "colour": null,
+  "custom": 1,
+  "default_email_template": null,
+  "default_print_format": null,
+  "default_view": null,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "documentation": null,
+  "editable_grid": 0,
+  "email_append_to": 0,
+  "engine": "InnoDB",
+  "fields": [
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "contact",
+    "fieldtype": "Link",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 0,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Contact",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "Contact",
+    "parent": "WhatsApp Dialogue Exchange",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "whatsapp_dialogue",
+    "fieldtype": "Link",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 0,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "WhatsApp Dialogue",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "WhatsApp Dialogue",
+    "parent": "WhatsApp Dialogue Exchange",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": "0",
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "active",
+    "fieldtype": "Check",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 0,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "In Progress",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": null,
+    "parent": "WhatsApp Dialogue Exchange",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "wde_table",
+    "fieldtype": "Table",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 0,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "WhatsApp Dialogue Exchange Item",
+    "parent": "WhatsApp Dialogue Exchange",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   }
+  ],
+  "force_re_route_to_default_view": 0,
+  "has_web_view": 0,
+  "hide_toolbar": 0,
+  "icon": null,
+  "image_field": null,
+  "in_create": 0,
+  "index_web_pages_for_search": 1,
+  "is_calendar_and_gantt": 0,
+  "is_published_field": null,
+  "is_submittable": 0,
+  "is_tree": 0,
+  "is_virtual": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "make_attachments_public": 0,
+  "max_attachments": 0,
+  "menu_index": null,
+  "migration_hash": null,
+  "modified": "2025-02-24 11:28:48.776792",
+  "module": "MSS Custom",
+  "name": "WhatsApp Dialogue Exchange",
+  "naming_rule": "",
+  "nsm_parent_field": null,
+  "parent_node": null,
+  "permissions": [
+   {
+    "amend": 0,
+    "cancel": 0,
+    "create": 1,
+    "delete": 1,
+    "email": 1,
+    "export": 1,
+    "if_owner": 0,
+    "import": 0,
+    "match": null,
+    "parent": "WhatsApp Dialogue Exchange",
+    "parentfield": "permissions",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "System Manager",
+    "select": 0,
+    "share": 1,
+    "submit": 0,
+    "write": 1
+   }
+  ],
+  "print_outline": null,
+  "queue_in_background": 0,
+  "quick_entry": 0,
+  "read_only": 0,
+  "restrict_to_domain": null,
+  "route": null,
+  "search_fields": null,
+  "sender_field": null,
+  "sender_name_field": null,
+  "show_name_in_global_search": 0,
+  "show_preview_popup": 0,
+  "show_title_field_in_link": 0,
+  "smallicon": null,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "subject": null,
+  "subject_field": null,
+  "tag_fields": null,
+  "timeline_field": null,
+  "title_field": null,
+  "track_changes": 0,
+  "track_seen": 0,
+  "track_views": 0,
+  "translated_doctype": 0,
+  "website_search_field": null
+ },
+ {
+  "_assign": null,
+  "_comments": null,
+  "_last_update": null,
+  "_liked_by": null,
+  "_user_tags": null,
+  "actions": [],
+  "allow_auto_repeat": 0,
+  "allow_copy": 0,
+  "allow_events_in_timeline": 0,
+  "allow_guest_to_view": 0,
+  "allow_import": 0,
+  "allow_rename": 1,
+  "app": null,
+  "autoname": null,
+  "beta": 0,
+  "color": null,
+  "colour": null,
+  "custom": 1,
+  "default_email_template": null,
+  "default_print_format": null,
+  "default_view": null,
+  "description": null,
+  "docstatus": 0,
+  "doctype": "DocType",
+  "document_type": "",
+  "documentation": null,
+  "editable_grid": 1,
+  "email_append_to": 0,
+  "engine": "InnoDB",
+  "fields": [
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "content_type_received",
+    "fieldtype": "Select",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Content Type Received",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": "text\nvideo\nimage\ndocument\naudio\nreaction\nflow\nlocation\ncontact\nbutton",
+    "parent": "WhatsApp Dialogue Exchange Item",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   },
+   {
+    "allow_bulk_edit": 0,
+    "allow_in_quick_entry": 0,
+    "allow_on_submit": 0,
+    "bold": 0,
+    "collapsible": 0,
+    "collapsible_depends_on": null,
+    "columns": 0,
+    "default": null,
+    "depends_on": null,
+    "description": null,
+    "documentation_url": null,
+    "fetch_from": null,
+    "fetch_if_empty": 0,
+    "fieldname": "content",
+    "fieldtype": "Data",
+    "hidden": 0,
+    "hide_border": 0,
+    "hide_days": 0,
+    "hide_seconds": 0,
+    "ignore_user_permissions": 0,
+    "ignore_xss_filter": 0,
+    "in_filter": 0,
+    "in_global_search": 0,
+    "in_list_view": 1,
+    "in_preview": 0,
+    "in_standard_filter": 0,
+    "is_virtual": 0,
+    "label": "Content",
+    "length": 0,
+    "link_filters": null,
+    "make_attachment_public": 0,
+    "mandatory_depends_on": null,
+    "max_height": null,
+    "no_copy": 0,
+    "non_negative": 0,
+    "oldfieldname": null,
+    "oldfieldtype": null,
+    "options": null,
+    "parent": "WhatsApp Dialogue Exchange Item",
+    "parentfield": "fields",
+    "parenttype": "DocType",
+    "permlevel": 0,
+    "placeholder": null,
+    "precision": "",
+    "print_hide": 0,
+    "print_hide_if_no_value": 0,
+    "print_width": null,
+    "read_only": 0,
+    "read_only_depends_on": null,
+    "remember_last_selected_value": 0,
+    "report_hide": 0,
+    "reqd": 0,
+    "search_index": 0,
+    "set_only_once": 0,
+    "show_dashboard": 0,
+    "show_on_timeline": 0,
+    "show_preview_popup": 0,
+    "sort_options": 0,
+    "translatable": 0,
+    "trigger": null,
+    "unique": 0,
+    "width": null
+   }
+  ],
+  "force_re_route_to_default_view": 0,
+  "has_web_view": 0,
+  "hide_toolbar": 0,
+  "icon": null,
+  "image_field": null,
+  "in_create": 0,
+  "index_web_pages_for_search": 1,
+  "is_calendar_and_gantt": 0,
+  "is_published_field": null,
+  "is_submittable": 0,
+  "is_tree": 0,
+  "is_virtual": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "make_attachments_public": 0,
+  "max_attachments": 0,
+  "menu_index": null,
+  "migration_hash": null,
+  "modified": "2025-02-24 11:28:48.636887",
+  "module": "MSS Custom",
+  "name": "WhatsApp Dialogue Exchange Item",
+  "naming_rule": "",
+  "nsm_parent_field": null,
+  "parent_node": null,
+  "permissions": [],
+  "print_outline": null,
+  "queue_in_background": 0,
+  "quick_entry": 0,
+  "read_only": 0,
+  "restrict_to_domain": null,
+  "route": null,
+  "search_fields": null,
+  "sender_field": null,
+  "sender_name_field": null,
+  "show_name_in_global_search": 0,
+  "show_preview_popup": 0,
+  "show_title_field_in_link": 0,
+  "smallicon": null,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": [],
+  "subject": null,
+  "subject_field": null,
+  "tag_fields": null,
+  "timeline_field": null,
+  "title_field": null,
+  "track_changes": 0,
+  "track_seen": 0,
+  "track_views": 0,
+  "translated_doctype": 0,
+  "website_search_field": null
+ }
+
+
+Server scripts I made in order to make a chat flow and capture information to log support tickets...
+
+def sys_whatsapp_message_issue(doc):
+
+    def error_contact_not_found(unknown_number):
+        frappe.log_error('Number does not match any contact', f'No contact/company found for {unknown_number}')
+        # send template message to Paul with details of person who sent message
+        # system notification to all support users
+        # send WhatsApp to number stating that they are not on the system
+
+    def error_no_customer_on_contact(contact_name):
+        frappe.log_error('No customer on contact', f'Contact Name {contact_name}')
+        # template message to Paul
+        # system notification to users
+        # send WhatsApp to user telling them to call Paul because their number could not be matched to any customer
+
+    def get_contact(mobile_no):
+        docs = frappe.get_list('Contact', filters={'mobile_no': mobile_no}, ignore_permissions=True)
+        if docs:
+            contact = frappe.get_doc('Contact', docs[0].get('name'))
+            return contact
+        else:
+            return None
+
+    def get_customer(contact_name):
+        existing_links = frappe.get_all("Dynamic Link", filters={
+            'link_doctype': 'Customer',
+            'parent': contact_name  # Parent is the Contact document
+        }, fields=['link_name'], ignore_permissions=True)
+
+        if not existing_links:
+            return None
+
+        return existing_links[0].get('link_name')
+
+
+    def wa_catch_director(doc, contact, customer):
+        """ forward to active ticket, commence whatsapp command action, continue WhatsApp dialogue exchange or prompt user to command """
+
+        def list_customer_issues():
+            # Fetch active issues for the customer
+            issues = frappe.get_all(
+                "Issue",
+                filters={"customer": customer, "status": ["!=", "Closed"]},
+                fields=["name", "subject", "status"],
+                ignore_permissions=True
+            )
+
+            if not issues:
+                return "No active issues found for the customer."
+
+            # Format the message with each issue in one line
+            send_whatsapp_message(contact.mobile_no, "*Active Issues* for Customer: " + customer)
+            for issue in issues:
+                message = f"*Issue ID: {issue['name']}*\n*Subject:* {issue['subject']}\n*Status:* {issue['status']}"
+                send_whatsapp_message(contact.mobile_no, message)
+
+
+        def send_whatsapp_message(to, message):
+            doc = frappe.get_doc({
+                'doctype': 'WhatsApp Message',
+                'to': to,
+                'content_type': 'text',
+                'type': 'Outgoing',
+                'message': message,
+            })
+            doc.insert(ignore_permissions=True)
+
+        def extract_command(message):
+            # Split the message into words
+            words = message.split()
+
+            # Iterate through the words and find the one starting with /issue
+            for word in words:
+                if word.startswith(('/issue', '/action')):
+                    return word
+
+            # If no command is found
+            return None
+
+        def create_issue(subject, description, issue_type):
+            # frappe.log_error(str(contact), str(contact.name))
+            issue = frappe.get_doc({
+                'doctype': 'Issue',
+                'subject': subject,
+                'issue_type': issue_type,
+                'description': description,
+                'priority': 'High' if issue_type == "Can't Access Server" else 'Low',
+                'status': 'Open',
+                'customer': customer,
+                'custom_contact_chat': contact
+            })
+            issue.insert(ignore_permissions=True)
+            contact.custom_current_support_issue = issue.name
+            contact.save(ignore_permissions=True)
+            return issue.name
+
+        def forward_to_issue():
+            
+            def notify_assigned_pupils(issue_doc):
+                """Fetches all assigned pupils for a given Issue and sends a system notification."""
+                
+                issue_name = issue_doc.name
+                message = f"WhatsApp from {issue_doc.customer} - {issue_name}"
+            
+                # Fetch all users assigned to the Issue
+                assigned_pupils = frappe.get_all(
+                    "ToDo",
+                    filters={"reference_type": "Issue", "reference_name": issue_name},
+                    fields=["allocated_to"]
+                )
+            
+                if not assigned_pupils:
+                    frappe.log_error(f"No pupils assigned to Issue {issue_name}.", "None")
+                    return
+            
+                recipients = [pupil["allocated_to"] for pupil in assigned_pupils]
+            
+                # Send System Notifications (without imports)
+                for recipient in recipients:
+                    doc = frappe.new_doc("Notification Log")
+                    doc.subject = message
+                    doc.content = message
+                    doc.for_user = recipient
+                    doc.document_type = "Issue"
+                    doc.document_name = issue_name
+                    doc.insert(ignore_permissions=True)
+            
+            doc.reference_doctype = 'Issue'
+            custom_current_support_issue = contact.get('custom_current_support_issue')
+            doc.reference_name = custom_current_support_issue
+            doc.save(ignore_permissions=True)
+            custom_current_support_issue_doc = frappe.get_doc('Issue', custom_current_support_issue)
+            notify_assigned_pupils(custom_current_support_issue_doc)
+
+        def clear_whatsapp_dialogue_exchange():
+            # Get the list of WhatsApp Dialogue Exchange documents matching the filters
+            wdes = frappe.get_list('WhatsApp Dialogue Exchange', filters={
+                'contact': contact.name,
+                'active': 1,
+                'whatsapp_dialogue': 'lpm0i21ut3'
+            }, ignore_permissions=True)
+
+            # Loop through the list and delete each document
+            for wde in wdes:
+                frappe.delete_doc('WhatsApp Dialogue Exchange', wde.get('name'), ignore_permissions=True)
+                print(f"Deleted WhatsApp Dialogue Exchange: {wde.get('name')}")
+
+        # check for / get active wa_exchanges and get next wde item + send it
+        def check_wa_exchange():
+            wdes = frappe.get_list(doctype='WhatsApp Dialogue Exchange', filters={'contact': contact.name, 'active': 1}, ignore_permissions=True)
+            if wdes:
+                wde = frappe.get_doc(doctype='WhatsApp Dialogue Exchange', name=wdes[0].get('name'), ignore_permissions=True)
+                wde.load_from_db()
+
+                whatsapp_dialogue = frappe.get_doc('WhatsApp Dialogue', wde.whatsapp_dialogue, ignore_permissions=True)
+                whatsapp_dialogue.load_from_db()
+
+                continue_wa_exchange(whatsapp_dialogue, wde)
+                return True
+            else:
+                return False
+
+        def continue_wa_exchange(whatsapp_dialogue, wde):
+            wd_table = whatsapp_dialogue.wd_table
+            wde_table = wde.get('wde_table')
+
+            def append_new_row():
+                new_row = wde.append('wde_table', {})
+                new_row.content_type_received = 'text'
+                wde.save(ignore_permissions=True)
+
+            if len(wde_table) < len(wd_table):
+                if wde_table:
+                    wde_table[-1].content = doc.message
+                    wde.save(ignore_permissions=True)
+                next_message_item = wd_table[len(wde_table)]
+                append_new_row()
+                send_whatsapp_message(contact.mobile_no, next_message_item.send_text)
+            else:
+                wde.active = 0
+                wde_table[-1].content = doc.message
+                wde.save(ignore_permissions=True)
+                # create_issue(wde_table[0].get('content'), wde_table[1].get('content'))
+                # issue_subject = whatsapp_dialogue.title
+                issue_type = whatsapp_dialogue.title
+                issue_subject = wde_table[0].get('content')
+                # create_issue(issue_subject, wde_table[1].get('content'))
+                
+                # issue_description = "\n\n".join(
+                #     [f"{i + 1}. {wd_table[i].get('send_text')}\n{wde_table[i].get('content')}" for i in
+                #      range(len(wd_table))])
+
+                issue_description = "<br><br>".join(
+                    [f"{i + 1}. {wd_table[i].get('send_text')}<br>{wde_table[i].get('content')}" for i in
+                     range(len(wd_table))]
+                )
+                issue_name = create_issue(issue_subject, issue_description, issue_type)
+                send_whatsapp_message(contact.mobile_no, f'Thank you {contact.first_name}, your issue has been successfully logged.\n\nYour reference number is: *{issue_name}*\n\nWe will be in touch with you shortly.')
+
+        def whatsapp_command_action():
+
+            message = doc.get('message')
+            command = extract_command(message)
+
+            # start add issue exchange
+            if command.startswith('/issue'):
+                clear_whatsapp_dialogue_exchange()
+                wd_docs = frappe.get_list('WhatsApp Dialogue', filters={'command': command}, ignore_permissions=True)
+                if wd_docs:
+                    new_wde = frappe.get_doc({
+                        'doctype': 'WhatsApp Dialogue Exchange',
+                        'contact': contact.name,
+                        'whatsapp_dialogue': wd_docs[0].get('name'),
+                        'active': 1
+                    })
+                    new_wde.insert(ignore_permissions=True)
+                    check_wa_exchange()
+                    return
+                else:
+                    send_whatsapp_message(contact.mobile_no, f'Command *{command}* not found. Please try again.')
+                    return
+
+            # list all active issues
+            elif doc.get('message').startswith('/action_list_issues'):
+                list_customer_issues()
+                return
+
+            # change to a specific active issue
+            elif doc.get('message').startswith('/action_change_my_active_issue'):
+                send_whatsapp_message(contact.mobile_no, 'Type /action_list_issue and reply to the ticket you want to switch to please')
+                return
+
+            # clear contact active issue
+            elif doc.get('message').startswith('/action_clear_working_issue'):
+                contact.custom_current_support_issue = ''
+                contact.save(ignore_permissions=True)
+                send_whatsapp_message(contact.mobile_no, 'You now have a clean slate!')
+                return
+
+
+        def help_message():
+            help_wa = frappe.get_doc({
+                'doctype': 'WhatsApp Message',
+                'message': (
+                    f"Hello {contact.get('first_name')}! Here are the commands you can use to manage your issues:\n\n"
+                    "*/issue_cant_access_server*:\n"
+                    "This will create a ticket for issues where you are unable to access the server.\n\n"
+                    "*/issue_IQ_automation*:\n"
+                    "This will create a ticket for any problems related to IQ automation functionality.\n\n"
+                    "*/issue_printer*:\n"
+                    "This will create a ticket for any printer-related problems.\n\n"
+                    "*/issue_layout_or_report*:\n"
+                    "This will create a ticket for issues related to generating reports or layout problems in IQ.\n\n"
+                    "*/issue_access_or_rights*:\n"
+                    "This will create a ticket for issues with user access or permissions in IQ.\n\n"
+                    "*/issue_IQ_error*:\n"
+                    "This will create a ticket for any IQ-related errors you are encountering.\n\n"
+                    "*/issue_accessing_IQ*:\n"
+                    "This will create a ticket for problems accessing or using the IQ system.\n\n"
+                    "*/issue_other*:\n"
+                    "This will create a ticket for any issues that don’t fit the predefined categories.\n\n"
+                    "*/action_list_issues*:\n"
+                    "This will return a summary of all open issues linked to your account.\n\n"
+                    "*/action_change_my_active_issue*:\n"
+                    "Reply to the issue message you want to interact with. Once switched, any updates or messages "
+                    "will apply to that specific issue.\n\n"
+                    "Feel free to reach out if you have further questions."
+                ),
+                'to': doc.get('from'),
+                'content_type': "text",
+                "type": 'Outgoing'
+            })
+            help_wa.insert(ignore_permissions=True)
+
+        if doc.content_type == 'text':
+
+            if doc.is_reply == 1:
+                replied_to_message = frappe.get_list(
+                    doctype='WhatsApp Message',
+                    fields=['*'],
+                    filters={'message_id': doc.reply_to_message_id},
+                    ignore_permissions=True
+                )
+                # frappe.log_error(replied_to_message[0].get('message')[12:27])
+                if replied_to_message:
+                    contact.custom_current_support_issue = replied_to_message[0].get('message')[11:25]
+                    contact.save(ignore_permissions=True)
+                    doc.reference_doctype = 'Issue'
+                    doc.reference_name = contact.custom_current_support_issue
+                    doc.save(ignore_permissions=True)
+                    send_whatsapp_message(contact.mobile_no, f'You are now interacting with ticket: {contact.custom_current_support_issue}')
+                    return
+
+            # FIRST check for commence whatsapp command action
+            if doc.get('message').startswith(('/issue', '/action')):
+                whatsapp_command_action()
+                return
+
+            # check or continue WhatsApp exchange
+            if check_wa_exchange():
+                return
+
+            # forward to active issue on contact
+            # get contact with linked issue and link WhatsApp message to issue
+            if contact.get('custom_current_support_issue'):
+                forward_to_issue()
+                return
+
+            help_message()
+        else:
+            # forward to active issue on contact
+            # get contact with linked issue and link WhatsApp message to issue
+            if contact.get('custom_current_support_issue'):
+                forward_to_issue()
+                return
+
+            help_message()
+
+    # Checks
+    def is_system(doc):
+        if doc.modified_by == frappe.get_doc('System User').get('username'):
+            return True
+        else:
+            return False
+
+    if not is_system(doc):
+        return
+    
+    if not doc.get('type') == 'Incoming':
+        return
+
+    contact = get_contact(doc.get('from'))
+    if not contact:
+        error_contact_not_found(doc.get('from'))
+        return
+
+    customer = get_customer(contact.name)
+    if not customer:
+        error_no_customer_on_contact(contact.name)
+        return
+
+    wa_catch_director(doc, contact, customer)
+
+
+#doc = frappe.get_doc('WhatsApp Message', doc.name)    
+sys_whatsapp_message_issue(doc)
+
+
+
+I do not want to you to make the whatsapp diolgue and exchange support ticket specific, I want to be able to setup a whatsapp dialogue or chat flow and when all the info is gathered the relevant doctype should be made.
+
+
+
+Does that makes sense?
+
+
+
+
+
+
+
+
+
+
+
+
+
