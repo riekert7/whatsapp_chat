@@ -9,17 +9,17 @@
   "doctype": "DocType",
   "engine": "InnoDB",
   "field_order": [
-    "contact",
+    "whatsapp_contact",
     "whatsapp_dialogue",
     "active",
     "wde_table"
   ],
   "fields": [
     {
-      "fieldname": "contact",
+      "fieldname": "whatsapp_contact",
       "fieldtype": "Link",
-      "label": "Contact",
-      "options": "Contact",
+      "label": "WhatsApp Contact",
+      "options": "WhatsApp Contact",
       "reqd": 1
     },
     {

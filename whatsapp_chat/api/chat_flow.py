@@ -5,16 +5,18 @@ from whatsapp_chat.api.sandbox import execute_custom_function
 def handle_chat_message(doc, method):
     """Handle incoming WhatsApp messages and manage chat flows"""
     
-    def get_contact(mobile_no):
-        docs = frappe.get_list('Contact', filters={'mobile_no': mobile_no}, ignore_permissions=True)
-        if docs:
-            return frappe.get_doc('Contact', docs[0].get('name'))
-        return None
+    def get_whatsapp_contact(mobile_no):
+        """Get WhatsApp Contact by mobile number"""
+        try:
+            return frappe.get_doc('WhatsApp Contact', {'mobile_no': mobile_no}, ignore_permissions=True)
+        except:
+            return None
 
-    def get_customer(contact_name):
+    def get_customer(whatsapp_contact_name):
+        """Get customer linked to WhatsApp Contact"""
         existing_links = frappe.get_all("Dynamic Link", filters={
             'link_doctype': 'Customer',
-            'parent': contact_name
+            'parent': whatsapp_contact_name
         }, fields=['link_name'], ignore_permissions=True)
         return existing_links[0].get('link_name') if existing_links else None
 
@@ -34,12 +36,12 @@ def handle_chat_message(doc, method):
         if current_index < len(dialogue.input_items):
             error_msg = dialogue.input_items[current_index].error_message
             if error_msg:
-                send_whatsapp_message(exchange.contact, error_msg)
+                send_whatsapp_message(exchange.whatsapp_contact, error_msg)
 
-    def get_active_exchange(contact):
-        """Get the active exchange for a contact"""
+    def get_active_exchange(whatsapp_contact):
+        """Get the active exchange for a WhatsApp Contact"""
         wdes = frappe.get_list('WhatsApp Dialogue Exchange', filters={
-            'contact': contact.name,
+            'whatsapp_contact': whatsapp_contact.name,
             'active': 1
         }, order_by='creation desc', limit=1, ignore_permissions=True)
         
@@ -71,6 +73,13 @@ def handle_chat_message(doc, method):
         
         # Insert the document
         target_doc.insert(ignore_permissions=True)
+        
+        # Update WhatsApp Contact with reference to the newly created document
+        whatsapp_contact = frappe.get_doc('WhatsApp Contact', exchange.whatsapp_contact)
+        whatsapp_contact.reference_doctype = dialogue.target_doctype
+        whatsapp_contact.reference_name = target_doc.name
+        whatsapp_contact.save(ignore_permissions=True)
+        
         return target_doc
 
     def continue_chat_flow(dialogue, exchange):
@@ -126,7 +135,7 @@ def handle_chat_message(doc, method):
         })
         wa_doc.insert(ignore_permissions=True)
 
-    def handle_command(message, contact):
+    def handle_command(message, whatsapp_contact):
         """Handle chat commands"""
         if message.startswith('/'):
             # Find matching dialogue
@@ -140,7 +149,7 @@ def handle_chat_message(doc, method):
                     # Start new chat flow
                     exchange = frappe.get_doc({
                         'doctype': 'WhatsApp Dialogue Exchange',
-                        'contact': contact.name,
+                        'whatsapp_contact': whatsapp_contact.name,
                         'whatsapp_dialogue': dialogue.name,
                         'active': 1
                     })
@@ -175,7 +184,7 @@ def handle_chat_message(doc, method):
                 )
         return False
 
-    def send_help_message(contact):
+    def send_help_message(whatsapp_contact):
         """Send help message with available commands"""
         # Get all available dialogues
         dialogues = frappe.get_all(
@@ -184,36 +193,59 @@ def handle_chat_message(doc, method):
             ignore_permissions=True
         )
         
-        message = f"Hello {contact.first_name}! Here are the available commands:\n\n"
+        message = f"Hello {whatsapp_contact.contact_name}! Here are the available commands:\n\n"
         
         for dialogue in dialogues:
             message += f"*{dialogue.command}*:\n{dialogue.title}\n\n"
         
         message += "Type any command to start a chat flow."
         
-        send_whatsapp_message(contact.mobile_no, message)
+        send_whatsapp_message(whatsapp_contact.mobile_no, message)
+
+    def link_message_to_reference(whatsapp_contact, doc):
+        """Link message to reference document if conditions are met"""
+        # Only link if reference fields are filled
+        if whatsapp_contact.reference_doctype and whatsapp_contact.reference_name:
+            # Update the message with reference fields
+            frappe.db.set_value(
+                "WhatsApp Message", 
+                doc.name, 
+                {
+                    "reference_doctype": whatsapp_contact.reference_doctype,
+                    "reference_name": whatsapp_contact.reference_name
+                },
+                update_modified=False,
+                ignore_permissions=True
+            )
+            frappe.db.commit()
+            return True
+        return False
 
     # Main flow
     if doc.type != 'Incoming':
         return
 
-    contact = get_contact(doc.get("from"))
-    if not contact:
-        frappe.log_error('Number does not match any contact', f'No contact found for {doc.get("from")}')
+    whatsapp_contact = get_whatsapp_contact(doc.get("from"))
+    if not whatsapp_contact:
+        # Only log critical errors
+        frappe.log_error('WhatsApp Contact not found', f'No WhatsApp Contact found for {doc.get("from")}')
         return
-
-    # customer = get_customer(contact.name)
-    # if not customer:
-    #     frappe.log_error('No customer on contact', f'Contact Name {contact.name}')
-    #     return
-
+        
     # Check for active chat flow
-    active_exchange = get_active_exchange(contact)
+    active_exchange = get_active_exchange(whatsapp_contact)
 
     if active_exchange:
+        # If there's an active exchange, don't link to reference document
         dialogue = frappe.get_doc('WhatsApp Dialogue', active_exchange.whatsapp_dialogue)
         continue_chat_flow(dialogue, active_exchange)
     else:
-        # Handle new command or show help
-        if not handle_command(doc.message, contact):
-            send_help_message(contact) 
+        # Check if message is a command
+        if doc.message and doc.message.startswith('/'):
+            # If it's a command, don't link to reference document
+            handle_command(doc.message, whatsapp_contact)
+        else:
+            # If not a command and no active exchange, link to reference document if available
+            linked = link_message_to_reference(whatsapp_contact, doc)
+            # Only show help message if message was not linked to a reference document
+            if not linked:
+                send_help_message(whatsapp_contact) 

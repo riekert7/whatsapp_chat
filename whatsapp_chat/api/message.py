@@ -16,23 +16,6 @@ def get_all(room: str, user_no: str):
     if '@' in user_no:
         contact = frappe.get_doc("WhatsApp Contact", room)
         user_no = contact.mobile_no
-
-    frappe.log_error(
-        title="WhatsApp Chat Debug",
-        message=f"Fetching messages for room: {room}, user_no: {user_no}"
-    )
-    
-    # First check if there are any messages in the database
-    message_count = frappe.db.count('WhatsApp Message', {
-        'to': user_no
-    }) + frappe.db.count('WhatsApp Message', {
-        'from': user_no
-    })
-    
-    frappe.log_error(
-        title="WhatsApp Chat Debug",
-        message=f"Total message count in database: {message_count}"
-    )
     
     # Get messages where the user is either sender or receiver
     messages = frappe.db.sql("""
@@ -58,19 +41,6 @@ def get_all(room: str, user_no: str):
         ORDER BY creation ASC
     """, {"user_no": user_no}, as_dict=True)
     
-    # Log the raw messages for debugging
-    frappe.log_error(
-        title="WhatsApp Chat Debug",
-        message=f"Found {len(messages)} messages. Messages: {messages}"
-    )
-    
-    # Log a sample of the messages to verify structure
-    if messages:
-        frappe.log_error(
-            title="WhatsApp Chat Debug",
-            message=f"Sample message structure: {messages[0]}"
-        )
-    
     return messages
 
 
@@ -84,7 +54,7 @@ def mark_as_read(room):
         return "ok"
     except Exception as e:
         frappe.log_error(
-            title="WhatsApp Chat Debug - Mark as Read Error",
+            title="WhatsApp Chat Error",
             message=f"Error marking room {room} as read: {str(e)}"
         )
         return "error"
@@ -93,11 +63,6 @@ def mark_as_read(room):
 
 @frappe.whitelist()
 def send(content, user, room, user_no, attachment=None):
-    frappe.log_error(
-        title="WhatsApp Chat Debug - Send Message",
-        message=f"Starting to send message: content={content}, user={user}, room={room}, user_no={user_no}, attachment={attachment}"
-    )
-    
     content_type = "text"
     if attachment:
         file_type = mimetypes.guess_type(content)[0]
@@ -126,11 +91,6 @@ def send(content, user, room, user_no, attachment=None):
             "content_type": content_type
         }).save()
     
-    frappe.log_error(
-        title="WhatsApp Chat Debug - Message Saved",
-        message=f"Message saved to database: doc={doc.name}, creation={doc.creation}"
-    )
-    
     # Prepare socket data for all users - ensure consistent data across all events
     socket_data = {
         "content": content,
@@ -143,11 +103,6 @@ def send(content, user, room, user_no, attachment=None):
         "message_id": doc.name,  # Use doc.name as unique message ID
         "message_type": doc.type.lower()  # Add message_type for backward compatibility
     }
-    
-    frappe.log_error(
-        title="WhatsApp Chat Debug - Emitting Socket Event",
-        message=f"Emitting socket event for room {room}: {socket_data}"
-    )
     
     # Emit room-specific event for all users in the room
     frappe.publish_realtime(room, socket_data)
@@ -164,11 +119,6 @@ def send(content, user, room, user_no, attachment=None):
         "message_type": doc.type.lower()  # Add message_type for backward compatibility
     }
     frappe.publish_realtime("latest_chat_updates", broadcast_data)
-    
-    frappe.log_error(
-        title="WhatsApp Chat Debug - Send Complete",
-        message=f"Message send process complete: {content}"
-    )
 
     return "ok"
 
@@ -214,11 +164,6 @@ def last_message(doc, method):
         }
         
         frappe.publish_realtime("latest_chat_updates", broadcast_data)
-        
-        frappe.log_error(
-            title="WhatsApp Chat Debug",
-            message=f"Emitted socket events for incoming message: {doc.message or doc.attach}"
-        )
     else:
         new_contact = frappe.get_doc({
             "doctype": "WhatsApp Contact",
@@ -242,11 +187,6 @@ def last_message(doc, method):
                         {"name": frappe.session.user_fullname, "email": frappe.session.user}
                     ]
                 }
-            )
-            
-            frappe.log_error(
-                title="WhatsApp Chat Debug",
-                message=f"Created new contact and emitted socket event: {new_contact.name}"
             )
 
     return "ok"
