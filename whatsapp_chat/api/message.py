@@ -105,11 +105,11 @@ def send(content, user, room, user_no, attachment=None):
         "sender": user,
         "sender_user_no": user,
         "creation": doc.creation,
-        "type": doc.type,  # Use the type from the document
+        "type": doc.type,
         "content_type": content_type,
-        "room": room,  # Add room info to help with message routing
-        "message_id": doc.name,  # Use doc.name as unique message ID
-        "message_type": doc.type.lower(),  # Add message_type for backward compatibility
+        "room": room,
+        "message_id": doc.name,
+        "message_type": doc.type.lower(),
         "reference_doctype": doc.reference_doctype,
         "reference_name": doc.reference_name
     }
@@ -125,8 +125,8 @@ def send(content, user, room, user_no, attachment=None):
         "sender": user,
         "sender_user_no": user,
         "type": doc.type,
-        "message_id": doc.name,  # Use doc.name as unique message ID
-        "message_type": doc.type.lower(),  # Add message_type for backward compatibility
+        "message_id": doc.name,
+        "message_type": doc.type.lower(),
         "reference_doctype": doc.reference_doctype,
         "reference_name": doc.reference_name
     }
@@ -154,11 +154,13 @@ def last_message(doc, method):
             "sender": doc.get("from"),
             "sender_user_no": doc.get("from"),
             "creation": doc.creation,
-            "type": doc.type,  # Use the type from the document
+            "type": doc.type,
             "content_type": doc.content_type,
-            "room": contact_name,  # Add room info to help with message routing
-            "message_id": doc.name,  # Use doc.name as unique message ID
-            "message_type": doc.type.lower()  # Add message_type for backward compatibility
+            "room": contact_name,
+            "message_id": doc.name,
+            "message_type": doc.type.lower(),
+            "reference_doctype": chat_doc.reference_doctype,
+            "reference_name": chat_doc.reference_name
         }
         
         frappe.publish_realtime(contact_name, socket_data)
@@ -170,9 +172,11 @@ def last_message(doc, method):
             "creation": doc.creation,
             "sender": doc.get("from"),
             "sender_user_no": doc.get("from"),
-            "type": doc.type,  # Use the type from the document
-            "message_id": doc.name,  # Use doc.name as unique message ID
-            "message_type": doc.type.lower()  # Add message_type for backward compatibility
+            "type": doc.type,
+            "message_id": doc.name,
+            "message_type": doc.type.lower(),
+            "reference_doctype": chat_doc.reference_doctype,
+            "reference_name": chat_doc.reference_name
         }
         
         frappe.publish_realtime("latest_chat_updates", broadcast_data)
@@ -189,7 +193,7 @@ def last_message(doc, method):
         if doc.type == 'Incoming':
             # Emit socket event for new contact
             frappe.publish_realtime(
-                "new_room_creation",  # Broadcast channel
+                "new_room_creation",
                 {
                     "room": new_contact.name,
                     "room_name": mobile_no,
@@ -197,7 +201,9 @@ def last_message(doc, method):
                     "members": [frappe.session.user],
                     "member_names": [
                         {"name": frappe.session.user_fullname, "email": frappe.session.user}
-                    ]
+                    ],
+                    "reference_doctype": new_contact.reference_doctype,
+                    "reference_name": new_contact.reference_name
                 }
             )
 
