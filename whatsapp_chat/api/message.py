@@ -75,20 +75,28 @@ def send(content, user, room, user_no, attachment=None):
         elif file_type in ["video/mp4", "video/3gp"]:
             content_type = "video"
 
+        # Get WhatsApp Contact and its reference info
+        whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
         doc = frappe.get_doc({
             "doctype": "WhatsApp Message",
             "to": user_no,
             "type": "Outgoing",
             "attach": content,
-            "content_type": content_type
+            "content_type": content_type,
+            "reference_doctype": whatsapp_contact.reference_doctype if whatsapp_contact else None,
+            "reference_name": whatsapp_contact.reference_name if whatsapp_contact else None
         }).save()
     else:
+        # Get WhatsApp Contact and its reference info
+        whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
         doc = frappe.get_doc({
             "doctype": "WhatsApp Message",
             "to": user_no,
             "type": "Outgoing",
             "message": content,
-            "content_type": content_type
+            "content_type": content_type,
+            "reference_doctype": whatsapp_contact.reference_doctype if whatsapp_contact else None,
+            "reference_name": whatsapp_contact.reference_name if whatsapp_contact else None
         }).save()
     
     # Prepare socket data for all users - ensure consistent data across all events
@@ -101,7 +109,9 @@ def send(content, user, room, user_no, attachment=None):
         "content_type": content_type,
         "room": room,  # Add room info to help with message routing
         "message_id": doc.name,  # Use doc.name as unique message ID
-        "message_type": doc.type.lower()  # Add message_type for backward compatibility
+        "message_type": doc.type.lower(),  # Add message_type for backward compatibility
+        "reference_doctype": doc.reference_doctype,
+        "reference_name": doc.reference_name
     }
     
     # Emit room-specific event for all users in the room
@@ -116,7 +126,9 @@ def send(content, user, room, user_no, attachment=None):
         "sender_user_no": user,
         "type": doc.type,
         "message_id": doc.name,  # Use doc.name as unique message ID
-        "message_type": doc.type.lower()  # Add message_type for backward compatibility
+        "message_type": doc.type.lower(),  # Add message_type for backward compatibility
+        "reference_doctype": doc.reference_doctype,
+        "reference_name": doc.reference_name
     }
     frappe.publish_realtime("latest_chat_updates", broadcast_data)
 

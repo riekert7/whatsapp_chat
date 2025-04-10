@@ -214,8 +214,7 @@ def handle_chat_message(doc, method):
                     "reference_doctype": whatsapp_contact.reference_doctype,
                     "reference_name": whatsapp_contact.reference_name
                 },
-                update_modified=False,
-                ignore_permissions=True
+                update_modified=False
             )
             frappe.db.commit()
             return True
