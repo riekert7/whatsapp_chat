@@ -16,6 +16,23 @@ $height: 582px;
   @return $result;
 }
 
+/* Theme variables */
+[data-theme="dark"] .chat-app {
+    --message-sent-bg: #1f3a1f;
+    --message-received-bg: #2a2a2a;
+    --message-text-color: #ffffff;
+    --message-text-muted: #a0a0a0;
+    --message-border-color: #404040;
+}
+
+[data-theme="light"] .chat-app {
+    --message-sent-bg: #daf8cb;
+    --message-received-bg: #f1f1f1;
+    --message-text-color: #333333;
+    --message-text-muted: #666666;
+    --message-border-color: #e0e0e0;
+}
+
 .chat-app {
   position: fixed;
   bottom: 24px;
@@ -250,6 +267,7 @@ $height: 582px;
     .message-name {
       font-size: $font-size-xs;
       font-weight: bold;
+      color: var(--message-text-muted);
     }
     .sender-message {
       margin-bottom: 5px;
@@ -257,12 +275,13 @@ $height: 582px;
       flex-direction: column;
       align-items: flex-end !important;
       .message-bubble {
-        background: var(--control-bg);
-        color: var(--text-color);
+        background: var(--message-sent-bg);
+        color: var(--message-text-color);
         padding: 8px 12px;
         font-size: $font-size-sm;
         border-radius: 18px 18px 0px 18px;
         max-width: 78%;
+        border: 1px solid var(--message-border-color);
       }
     }
     .recipient-message {
@@ -271,29 +290,30 @@ $height: 582px;
       flex-direction: column;
       align-items: flex-start !important;
       .message-bubble {
-        background: var(--primary-color);
-        color: var(--white);
+        background: var(--message-received-bg);
+        color: var(--message-text-color);
         padding: 8px 12px;
         font-size: $font-size-sm;
         border-radius: 18px 18px 18px 0px;
         max-width: 78%;
+        border: 1px solid var(--message-border-color);
       }
     }
 
     .message-time {
-      color: var(--text-muted);
+      color: var(--message-text-muted);
       font-size: $font-size-xs;
       margin-top: var(--margin-xs);
     }
     .message-name {
-      color: var(--text-muted);
+      color: var(--message-text-muted);
       font-size: $font-size-xs;
       margin-bottom: var(--margin-xs);
     }
     .date-line {
       width: 100%;
       text-align: center;
-      border-bottom: 1px solid var(--gray-400);
+      border-bottom: 1px solid var(--message-border-color);
       line-height: 0.1em;
       margin: 10px 0 20px;
       span {
