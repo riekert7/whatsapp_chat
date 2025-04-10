@@ -239,7 +239,7 @@ def handle_chat_message(doc, method):
         continue_chat_flow(dialogue, active_exchange)
     else:
         # Check if message is a command
-        if doc.message and doc.message.startswith('/'):
+        if doc.message and doc.message.startswith('/') and doc.get('content_type') == 'text':
             # If it's a command, don't link to reference document
             handle_command(doc.message, whatsapp_contact)
         else:
