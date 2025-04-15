@@ -115,41 +115,39 @@ let lastMarkedRoom = null;
 let lastMarkedTime = 0;
 
 async function mark_message_read(room) {
-  console.log('mark_message_read called for room:', room);
+  // Only mark as read if we're in the chat room
+  if (!is_in_chat_room(room)) {
+    return;
+  }
   
   // Check if we've marked this room as read recently (within 1 second)
   const now = Date.now();
   if (lastMarkedRoom === room && now - lastMarkedTime < 1000) {
-    console.log('Skipping duplicate mark_message_read call for room:', room);
     return;
   }
   
   // Clear any existing timeout
   if (markMessageReadTimeout) {
-    console.log('Clearing existing mark_message_read timeout');
     clearTimeout(markMessageReadTimeout);
   }
   
   // Set a new timeout to debounce the call
   markMessageReadTimeout = setTimeout(async () => {
     try {
-      console.log('Calling mark_as_read API for room:', room);
       const response = await frappe.call({
         method: 'whatsapp_chat.api.message.mark_as_read',
         args: {
           room: room,
         },
       });
-      console.log('mark_as_read API response:', response);
       
       // Update tracking variables
       lastMarkedRoom = room;
-      lastMarkedTime = Date.now();
+      lastMarkedTime = now;
       
       return response;
     } catch (error) {
       console.error('Error in mark_message_read:', error);
-      //pass
     }
   }, 100); // 100ms debounce
 }
