@@ -250,3 +250,8 @@ sounds = [
     {'name': 'chat-message-send', 'src': '/assets/chat/sounds/chat-message-send.mp3', 'volume': 0.2},
     {'name': 'chat-message-receive', 'src': '/assets/chat/sounds/chat-message-receive.mp3', 'volume': 0.5}
 ]
+
+fixtures = [
+    {'dt': 'WhatsApp Templates', 'filters': [['name', '=', 'reinitialize_convo_with_doc-en']]},
+    {'dt': 'WhatsApp Templates', 'filters': [['name', '=', 'reinitialize_convo_without_doc-en']]}
+]
