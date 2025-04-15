@@ -1,5 +1,7 @@
 import frappe
+from frappe.utils import add_days, now, get_datetime
 import mimetypes
+import time
 
 
 
@@ -37,7 +39,7 @@ def get_all(room: str, user_no: str):
             END as sender,
             type
         FROM `tabWhatsApp Message` 
-        WHERE (`to` = %(user_no)s OR `from` = %(user_no)s)
+        WHERE (`to` = %(user_no)s OR `from` = %(user_no)s) AND `template` IS NULL
         ORDER BY creation ASC
     """, {"user_no": user_no}, as_dict=True)
     
@@ -47,7 +49,14 @@ def get_all(room: str, user_no: str):
 @frappe.whitelist()
 def mark_as_read(room):
     try:
-        frappe.db.set_value("WhatsApp Contact", room, "is_read", 1)
+        # Get the document with current values
+        doc = frappe.get_doc("WhatsApp Contact", room)
+        
+        # Only update if not already read
+        if doc.is_read == 0:
+            doc.is_read = 1
+            # Use ignore_version=True to handle concurrent updates
+            doc.save(ignore_version=True)
         return "ok"
     except Exception as e:
         frappe.log_error(
@@ -56,22 +65,85 @@ def mark_as_read(room):
         )
         return "error"
 
-@frappe.whitelist()
-def mark_as_unread(room):
-    try:
-        frappe.db.set_value("WhatsApp Contact", room, "is_read", 0)
-        return "ok"
-    except Exception as e:
-        frappe.log_error(
-            title="WhatsApp Chat Error",
-            message=f"Error marking room {room} as unread: {str(e)}"
-        )
-        return "error"
+def waba_conversation_passed(wa_contact):
+    """Check if the last message in the conversation is older than 24 hours"""
+    docs = frappe.get_all(
+        "WhatsApp Message", 
+        filters={"from": wa_contact.mobile_no},
+        fields=["creation"],
+        order_by="creation desc",
+        limit=1
+    )
+    
+    if not docs:
+        return True
+        
+    last_message_time = docs[0].creation
+    if not last_message_time:
+        return False
+        
+    # Convert to datetime if it's a string
+    if isinstance(last_message_time, str):
+        last_message_time = get_datetime(last_message_time)
+        
+    # Get current time as datetime
+    current_time = get_datetime(now)
+    one_day_ago = add_days(current_time, -1)
+    
+    # Check if the last message is older than 24 hours
+    return last_message_time < one_day_ago
 
+# def reinitialize_waba_conversation(wa_contact, text_message):
+#     # frappe.call(
+#     #     'frappe_whatsapp.frappe_whatsapp.doctype.whatsapp_message.whatsapp_message.send_template',
+#     #     to=wa_contact.mobile_no,
+#     #     reference_doctype='WhatsApp Contact',
+#     #     reference_name=wa_contact.name,
+#     #     template='reinitialize_convo-'
+#     # )
+#     settings = frappe.get_doc('WhatsApp Settings')
+#     url = settings.get('url')
+#     version = settings.get('version')
+#     access_token = settings.get_password('token')
+#     phone_number_id = settings.get('phone_number_id')
+#     template = frappe.get_doc('WhatsApp Template', 'init_convo_again-')
+#     frappe.make_post_request(
+#         url=f'{url}/{version}/{phone_number_id}/messages',
+#         headers={
+#             'Authorization': f'Bearer {access_token}',
+#             'Content-Type': 'application/json'
+#         },
+#         data={
+#             "messaging_product": "whatsapp",
+#             "to": wa_contact.mobile,
+#             "type": "template",
+#             "template": {
+#                 "name": template.name,
+#                 "language": { "code": template.language_code },
+#                 "components": [
+#                     {
+#                         "type": "body",
+#                         "parameters": [
+#                             {
+#                                 "type": "text",
+#                                 "text": text_message
+#                             }
+#                         ]
+#                     }
+#                 ]
+#             }
+#         }
+#     )
 
+#     time.sleep(2)
 
 @frappe.whitelist()
 def send(content, user, room, user_no, attachment=None):
+    # Get WhatsApp Contact and its reference info
+    whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
+    if waba_conversation_passed(whatsapp_contact):
+        frappe.throw('No active conversation, please send a template message and wait for customer response to open a new 24 hour conversation.')
+    
     content_type = "text"
     if attachment:
         file_type = mimetypes.guess_type(content)[0]
@@ -83,9 +155,6 @@ def send(content, user, room, user_no, attachment=None):
             content_type = 'audio'
         elif file_type in ["video/mp4", "video/3gp"]:
             content_type = "video"
-
-        # Get WhatsApp Contact and its reference info
-        whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
         doc = frappe.get_doc({
             "doctype": "WhatsApp Message",
             "to": user_no,
@@ -95,9 +164,8 @@ def send(content, user, room, user_no, attachment=None):
             "reference_doctype": whatsapp_contact.reference_doctype if whatsapp_contact else None,
             "reference_name": whatsapp_contact.reference_name if whatsapp_contact else None
         }).save()
+
     else:
-        # Get WhatsApp Contact and its reference info
-        whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
         doc = frappe.get_doc({
             "doctype": "WhatsApp Message",
             "to": user_no,
@@ -154,8 +222,8 @@ def last_message(doc, method):
     if contact_name:
         chat_doc = frappe.get_doc("WhatsApp Contact", contact_name)
         chat_doc.last_message = doc.message or doc.attach
+        chat_doc.is_read = 1 if doc.type == 'Incoming' else 0
         chat_doc.save(ignore_version=True)
-        mark_as_unread(contact_name)
         
         # Emit socket event for real-time updates with consistent data
         socket_data = {
