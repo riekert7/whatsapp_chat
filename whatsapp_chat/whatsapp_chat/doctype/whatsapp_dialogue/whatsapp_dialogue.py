@@ -23,43 +23,24 @@ class WhatsAppDialogue(Document):
         if self.command.lstrip('/') != formatted_command:
             frappe.throw(_("Command must only contain lowercase letters, numbers, and underscores. Example: /issue_integration_failure"))
             
-        if self.type == "Create Document":
-            if not self.target_doctype:
-                frappe.throw(_("Target DocType is required for Create Document type"))
-                
-            # Get all fields from target DocType
-            target_fields = [field.fieldname for field in frappe.get_meta(self.target_doctype).fields]
+        # Validate custom script
+        if not self.custom_script:
+            frappe.throw(_("Custom Script is required"))
+        try:
+            # Try to compile the script to check for syntax errors
+            compile(self.custom_script, '<string>', 'exec')
+        except Exception as e:
+            frappe.throw(_("Invalid Python syntax in custom script: {0}").format(str(e)))
             
-            # Validate input items
+        # Validate input items if collect_input_items is checked
+        if self.collect_input_items:
+            if not self.input_items:
+                frappe.throw(_("Input Items are required when Collect Input Items is checked"))
             for item in self.input_items:
                 if not item.send_text:
-                    frappe.throw(_("Text to send is required"))
+                    frappe.throw(_("Text to send is required for all input items"))
                 if not item.receive_text:
-                    frappe.throw(_("Receive Content type is required"))
-                if not item.target_field:
-                    frappe.throw(_("Target Field is required"))
-                if item.target_field not in target_fields:
-                    frappe.throw(_("Target Field {0} does not exist in {1}").format(item.target_field, self.target_doctype))
-                    
-            # Validate system items
-            for item in self.system_items:
-                if not item.target_field:
-                    frappe.throw(_("Target Field is required"))
-                if item.target_field not in target_fields:
-                    frappe.throw(_("Target Field {0} does not exist in {1}").format(item.target_field, self.target_doctype))
-                if item.field_type == "Default" and not item.default_value:
-                    frappe.throw(_("Default Value is required when Field Type is Default"))
-                elif item.field_type == "Function" and not item.function_script:
-                    frappe.throw(_("Function Script is required when Field Type is Function"))
-                    
-        elif self.type == "Execute Script":
-            if not self.custom_script:
-                frappe.throw(_("Custom Script is required for Execute Script type"))
-            try:
-                # Try to compile the script to check for syntax errors
-                compile(self.custom_script, '<string>', 'exec')
-            except Exception as e:
-                frappe.throw(_("Invalid Python syntax in custom script: {0}").format(str(e)))
+                    frappe.throw(_("Receive Content type is required for all input items"))
 
     def format_command_name(self, command):
         """Format command to only contain lowercase letters and underscores"""
@@ -77,9 +58,6 @@ class WhatsAppDialogue(Document):
 
     def execute_custom_script(self, context):
         """Execute the custom script with the given context"""
-        if self.type != "Execute Script":
-            return
-            
         # Create a safe namespace for the script
         namespace = {
             'frappe': frappe,

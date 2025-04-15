@@ -15,7 +15,7 @@
   "fields": [
     {
       "fieldname": "content",
-      "fieldtype": "Data",
+      "fieldtype": "Long Text",
       "label": "Response Content",
       "in_list_view": 1
     },
