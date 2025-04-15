@@ -47,15 +47,24 @@ def get_all(room: str, user_no: str):
 @frappe.whitelist()
 def mark_as_read(room):
     try:
-        doc = frappe.get_doc("WhatsApp Contact", room)
-        doc.is_read = 1
-        # Use ignore_version=True to handle concurrent updates
-        doc.save(ignore_version=True)
+        frappe.db.set_value("WhatsApp Contact", room, "is_read", 1)
         return "ok"
     except Exception as e:
         frappe.log_error(
             title="WhatsApp Chat Error",
             message=f"Error marking room {room} as read: {str(e)}"
+        )
+        return "error"
+
+@frappe.whitelist()
+def mark_as_unread(room):
+    try:
+        frappe.db.set_value("WhatsApp Contact", room, "is_read", 0)
+        return "ok"
+    except Exception as e:
+        frappe.log_error(
+            title="WhatsApp Chat Error",
+            message=f"Error marking room {room} as unread: {str(e)}"
         )
         return "error"
 
@@ -145,8 +154,8 @@ def last_message(doc, method):
     if contact_name:
         chat_doc = frappe.get_doc("WhatsApp Contact", contact_name)
         chat_doc.last_message = doc.message or doc.attach
-        chat_doc.is_read = 0
         chat_doc.save(ignore_version=True)
+        mark_as_unread(contact_name)
         
         # Emit socket event for real-time updates with consistent data
         socket_data = {
