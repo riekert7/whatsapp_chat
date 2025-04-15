@@ -93,56 +93,72 @@ def waba_conversation_passed(wa_contact):
     # Check if the last message is older than 24 hours
     return last_message_time < one_day_ago
 
-# def reinitialize_waba_conversation(wa_contact, text_message):
-#     # frappe.call(
-#     #     'frappe_whatsapp.frappe_whatsapp.doctype.whatsapp_message.whatsapp_message.send_template',
-#     #     to=wa_contact.mobile_no,
-#     #     reference_doctype='WhatsApp Contact',
-#     #     reference_name=wa_contact.name,
-#     #     template='reinitialize_convo-'
-#     # )
-#     settings = frappe.get_doc('WhatsApp Settings')
-#     url = settings.get('url')
-#     version = settings.get('version')
-#     access_token = settings.get_password('token')
-#     phone_number_id = settings.get('phone_number_id')
-#     template = frappe.get_doc('WhatsApp Template', 'init_convo_again-')
-#     frappe.make_post_request(
-#         url=f'{url}/{version}/{phone_number_id}/messages',
-#         headers={
-#             'Authorization': f'Bearer {access_token}',
-#             'Content-Type': 'application/json'
-#         },
-#         data={
-#             "messaging_product": "whatsapp",
-#             "to": wa_contact.mobile,
-#             "type": "template",
-#             "template": {
-#                 "name": template.name,
-#                 "language": { "code": template.language_code },
-#                 "components": [
-#                     {
-#                         "type": "body",
-#                         "parameters": [
-#                             {
-#                                 "type": "text",
-#                                 "text": text_message
-#                             }
-#                         ]
-#                     }
-#                 ]
-#             }
-#         }
-#     )
+def reinitialize_waba_conversation(wa_contact):
+    if wa_contact.get('reference_doctype') and wa_contact.get('reference_name'):
+        template = 'reinitialize_convo_with_doc-en'
+        frappe.call(
+            'frappe_whatsapp.frappe_whatsapp.doctype.whatsapp_message.whatsapp_message.send_template',
+            to=wa_contact.mobile_no,
+            reference_doctype='WhatsApp Contact',
+            reference_name=wa_contact.name,
+            template=template
+        )
+        frappe.db.set_value('WhatsApp Contact', wa_contact.name, 'last_message', f'{template} sent. Awaiting Customer Response')
+        frappe.throw(f'No active conversation, {template} sent. Please wait for customer response to open a new 24 hour conversation.')
+    else:
+        template = 'reinitialize_convo_without_doc-en'
+        frappe.call(
+            'frappe_whatsapp.frappe_whatsapp.doctype.whatsapp_message.whatsapp_message.send_template',
+            to=wa_contact.mobile_no,
+            reference_doctype='WhatsApp Contact',
+            reference_name=wa_contact.name,
+            template=template
+        )
+        frappe.db.set_value('WhatsApp Contact', wa_contact.name, 'last_message', f'{template} sent. Awaiting Customer Response')
+        frappe.throw(f'No active conversation, {template} sent. Please wait for customer response to open a new 24 hour conversation.')
+    
+    # settings = frappe.get_doc('WhatsApp Settings')
+    # url = settings.get('url')
+    # version = settings.get('version')
+    # access_token = settings.get_password('token')
+    # phone_number_id = settings.get('phone_number_id')
+    # template = frappe.get_doc('WhatsApp Template', 'init_convo_again-')
+    # frappe.make_post_request(
+    #     url=f'{url}/{version}/{phone_number_id}/messages',
+    #     headers={
+    #         'Authorization': f'Bearer {access_token}',
+    #         'Content-Type': 'application/json'
+    #     },
+    #     data={
+    #         "messaging_product": "whatsapp",
+    #         "to": wa_contact.mobile,
+    #         "type": "template",
+    #         "template": {
+    #             "name": template.name,
+    #             "language": { "code": template.language_code },
+    #             "components": [
+    #                 {
+    #                     "type": "body",
+    #                     "parameters": [
+    #                         {
+    #                             "type": "text",
+    #                             "text": text_message
+    #                         }
+    #                     ]
+    #                 }
+    #             ]
+    #         }
+    #     }
+    # )
 
-#     time.sleep(2)
+    #time.sleep(2)
 
 @frappe.whitelist()
 def send(content, user, room, user_no, attachment=None):
     # Get WhatsApp Contact and its reference info
     whatsapp_contact = frappe.get_doc('WhatsApp Contact', {'mobile_no': user_no}, ignore_permissions=True)
     if waba_conversation_passed(whatsapp_contact):
-        frappe.throw('No active conversation, please send a template message and wait for customer response to open a new 24 hour conversation.')
+        reinitialize_waba_conversation(whatsapp_contact)
     
     content_type = "text"
     if attachment:
@@ -222,7 +238,7 @@ def last_message(doc, method):
     if contact_name:
         chat_doc = frappe.get_doc("WhatsApp Contact", contact_name)
         chat_doc.last_message = doc.message or doc.attach
-        chat_doc.is_read = 1 if doc.type == 'Incoming' else 0
+        chat_doc.is_read = 0 if doc.get('type') == 'Incoming' else 1
         chat_doc.save(ignore_version=True)
         
         # Emit socket event for real-time updates with consistent data
