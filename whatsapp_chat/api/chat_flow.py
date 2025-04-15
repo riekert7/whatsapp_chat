@@ -265,5 +265,8 @@ def handle_chat_message(doc, method):
             # If it's a command, handle it
             handle_command(message_content, whatsapp_contact, doc)
         else:
-            # If not a command and no active exchange, show help
-            send_help_message(whatsapp_contact) 
+            # If not a command and no active exchange, link to reference document if available
+            linked = link_message_to_reference(whatsapp_contact, doc)
+            if not linked:
+                # If not a command and no active exchange, show help
+                send_help_message(whatsapp_contact) 
