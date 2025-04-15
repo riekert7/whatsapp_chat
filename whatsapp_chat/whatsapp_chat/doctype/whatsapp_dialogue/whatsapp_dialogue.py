@@ -14,6 +14,18 @@ class WhatsAppDialogue(Document):
         if not self.command:
             frappe.throw(_("Command is required"))
             
+        # Validate command uniqueness
+        existing = frappe.get_all(
+            'WhatsApp Dialogue',
+            filters={
+                'command': self.command,
+                'name': ['!=', self.name]
+            },
+            limit=1
+        )
+        if existing:
+            frappe.throw(_("Command '{0}' is already used by another dialogue").format(self.command))
+            
         # Validate command starts with forward slash
         if not self.command.startswith('/'):
             frappe.throw(_("Command must start with a forward slash (/)"))
@@ -82,46 +94,58 @@ class WhatsAppDialogue(Document):
             )
             frappe.throw(_("Error executing custom script: {0}").format(str(e)))
 
-    def on_update(self):
-        """Sync commands with WhatsApp Business API after save"""
-        # Only proceed if this is a new document or if title/command has changed
-        if not (self.is_new() or self.has_value_changed('title') or self.has_value_changed('command')):
-            return
-            
-        # Get all active WhatsApp Dialogues
-        dialogues = frappe.get_all(
-            'WhatsApp Dialogue',
-            fields=['title', 'command'],
-            limit=10
-        )
-        
-        # Prepare commands list
-        commands = []
-        for dialogue in dialogues:
-            command_name = self.format_command_name(dialogue.command)
-            commands.append({
-                "command_name": command_name,
-                "command_description": dialogue.title
-            })
-        
-        # Get WhatsApp Settings
-        settings = frappe.get_doc("WhatsApp Settings", "WhatsApp Settings")
-        token = settings.get_password("token")
-        
-        # Prepare headers and URL
-        headers = {
-            "authorization": f"Bearer {token}",
-            "content-type": "application/json",
-        }
-        url = f"{settings.url}/{settings.version}/{settings.phone_id}/conversational_automation"
-        
-        # Make API request
-        try:
-            response = make_post_request(url, headers=headers, json={"commands": commands})
-        except Exception as e:
-            frappe.log_error(
-                title="WhatsApp API Error",
-                message=f"Failed to sync commands: {str(e)}",
-                reference_doctype=self.doctype,
-                reference_name=self.name
-            ) 
+@frappe.whitelist()
+def sync_commands():
+
+    def format_command_for_api(command):
+        """Format command to only contain lowercase letters and underscores"""
+        # Remove leading slash if present
+        command = command.lstrip('/')
+        # Replace any non-alphanumeric characters with underscores
+        command = re.sub(r'[^a-zA-Z0-9]', '_', command)
+        # Convert to lowercase
+        command = command.lower()
+        # Replace multiple consecutive underscores with a single one
+        command = re.sub(r'_+', '_', command)
+        # Remove leading and trailing underscores
+        command = command.strip('_')
+        return command
+    # Get all active WhatsApp Dialogues
+    dialogues = frappe.get_all(
+        'WhatsApp Dialogue',
+        fields=['title', 'command'],
+        limit=10
+    )
+    
+    # Prepare commands list
+    commands = []
+    for dialogue in dialogues:
+        command_name = format_command_for_api(dialogue.command)
+        commands.append({
+            "command_name": command_name,
+            "command_description": dialogue.title
+        })
+    
+    # Get WhatsApp Settings
+    settings = frappe.get_doc("WhatsApp Settings", "WhatsApp Settings")
+    token = settings.get_password("token")
+    
+    # Prepare headers and URL
+    headers = {
+        "authorization": f"Bearer {token}",
+        "content-type": "application/json",
+    }
+    url = f"{settings.url}/{settings.version}/{settings.phone_id}/conversational_automation"
+    
+    # Make API request
+    try:
+        response = make_post_request(url, headers=headers, json={"commands": commands})
+        return {"message": "Commands synced successfully"}
+    except Exception as e:
+        frappe.log_error(
+            title="WhatsApp API Error",
+            message=f"Failed to sync commands: {str(e)}"
+        ) 
+        return {"message": f"Failed to sync commands: {str(e)}"}
+
+    return {"message": f"Failed to sync commands: {str(e)}"}
