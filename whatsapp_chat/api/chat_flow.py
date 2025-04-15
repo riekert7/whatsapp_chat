@@ -207,16 +207,9 @@ def handle_chat_message(doc, method):
         # Only link if reference fields are filled
         if whatsapp_contact.reference_doctype and whatsapp_contact.reference_name:
             # Update the message with reference fields
-            frappe.db.set_value(
-                "WhatsApp Message", 
-                doc.name, 
-                {
-                    "reference_doctype": whatsapp_contact.reference_doctype,
-                    "reference_name": whatsapp_contact.reference_name
-                },
-                update_modified=False
-            )
-            frappe.db.commit()
+            doc.reference_doctype = whatsapp_contact.reference_doctype
+            doc.reference_name = whatsapp_contact.reference_name
+            doc.save(ignore_permissions=True)
             return True
         return False
 
@@ -238,10 +231,11 @@ def handle_chat_message(doc, method):
         dialogue = frappe.get_doc('WhatsApp Dialogue', active_exchange.whatsapp_dialogue)
         continue_chat_flow(dialogue, active_exchange)
     else:
-        # Check if message is a command
-        if doc.message and doc.message.startswith('/') and doc.get('content_type') == 'text':
+        # Check if message is a command (for both text and media messages)
+        message_content = doc.message if doc.content_type == 'text' else doc.attach
+        if message_content and message_content.startswith('/') and doc.content_type == 'text':
             # If it's a command, don't link to reference document
-            handle_command(doc.message, whatsapp_contact)
+            handle_command(message_content, whatsapp_contact)
         else:
             # If not a command and no active exchange, link to reference document if available
             linked = link_message_to_reference(whatsapp_contact, doc)
