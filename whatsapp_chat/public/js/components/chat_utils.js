@@ -115,11 +115,7 @@ let lastMarkedRoom = null;
 let lastMarkedTime = 0;
 
 async function mark_message_read(room) {
-  // Only mark as read if we're in the chat room
-  if (!is_in_chat_room(room)) {
-    return;
-  }
-  
+ 
   // Check if we've marked this room as read recently (within 1 second)
   const now = Date.now();
   if (lastMarkedRoom === room && now - lastMarkedTime < 1000) {
