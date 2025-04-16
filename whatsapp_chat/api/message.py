@@ -229,6 +229,8 @@ def send(content, user, room, user_no, attachment=None):
 
 
 def last_message(doc, method):
+    """Update the last message and is_read for the WhatsApp Contact (Frontend Stuff only - Actual Chat Flow Logic in chat_flow.py)"""
+
     if doc.type == 'Outgoing':
         mobile_no = doc.to
     else:
